@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{3.4 Rewrite: Rational Calculus}
+\author{Andrew Knauft}
+\date{November, 2020}
+
+\usepackage{graphicx, amsmath, amsthm, amssymb}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.8em}
+
+\begin{document}
+
+\maketitle
+
+\section{Background}
+From the text: 
+\begin{quote}
+    How do you find a cubic polynomial \(f(x)\) with integer coefficients and rational roots, whose extrema and inflection points have rational coordinates?
+\end{quote}
+\section{Algorithm}
+\begin{enumerate}
+    \item Select two integers, \(r\) and \(s\), and use them to build the Eisenstein integer
+    \[
+        \alpha+\beta\omega = (1-\omega)(r+s\omega)^2
+    \]
+    \item Use the norm of \(\alpha+\beta\omega\) as the coefficient \(b\) on the cubic 
+    \[
+        f(x)=x^3-bx+c.
+    \]
+    This cubic has \(-\alpha\) and \(\beta\) as two of its roots.
+    \item Solve for \(c\) by setting \(f(-\alpha)=0\), or \(f(\beta)=0\).
+\end{enumerate}
+Note that \(g(x) = f(x-h)\) is simply a horizontal translation of \(f(x)\), and as such will have integer features exactly when \(f(x)\) has integer features, provided \(h\) is an integer. This can be used to build a cubic where the quadratic coefficient is non-zero.
+
+\section{Explanation}
+See text, pages 124--125.
+
+\section{Example}
+\begin{enumerate}
+    \item Let \(r=2,\ s=-1\). Then, 
+    \begin{align*}
+    \alpha+\beta\omega  &= (1-\omega)(2-\omega)^2 \\
+                        &= (1-\omega)(4-4\omega+\omega^2)\\
+                        &= (1-\omega)\left(4-4\omega+(-1-\omega)\right)\\
+                        &= (1-\omega)(3-5\omega)\\
+                        &= 3-5\omega -3\omega+5\omega^2 \\
+                        &= 3-8\omega+5(-1-\omega) \\
+                        &= -2-13\omega.
+    \end{align*}
+    \item Now, the norm of \(-2-13\omega\) is given by 
+    \begin{align*}
+        \alpha^2-\alpha\beta+\beta^2    &= (-2)^2-(-2)(-13)+(-13)^2 \\
+                                        &= 4-26+169 \\
+                                        &= 147
+    \end{align*}
+    Therefore, we take \fbox{\(-b = -147\)} as our linear coefficient.
+    \item Solving for \(c\):
+    \[
+        f(-\alpha) = f(2) = (2)^3-147(2)+c = 0 \Rightarrow \fbox{c = 286}.
+    \]
+\end{enumerate}
+
+Thus, we take our cubic to be \(f(x) = x^3-147x+286\), or any horizontal translation thereof.
+
+\vspace{1.5in}
+Desmos: \url{https://www.desmos.com/calculator/7j2exaonkk}
+
+\end{document}
